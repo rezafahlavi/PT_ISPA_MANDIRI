@@ -247,7 +247,6 @@ public class formpenjualan extends javax.swing.JFrame {
         });
         jPanel1.add(thsatuan, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 260, 130, 30));
 
-        ttotal.setBackground(new java.awt.Color(255, 255, 255));
         ttotal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ttotalActionPerformed(evt);
@@ -262,7 +261,7 @@ public class formpenjualan extends javax.swing.JFrame {
                 hitungActionPerformed(evt);
             }
         });
-        jPanel1.add(hitung, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 300, 130, 30));
+        jPanel1.add(hitung, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 300, 150, 30));
 
         tabel.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -371,7 +370,7 @@ public class formpenjualan extends javax.swing.JFrame {
                 hitung1ActionPerformed(evt);
             }
         });
-        jPanel1.add(hitung1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 340, 130, 30));
+        jPanel1.add(hitung1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 340, 150, 30));
 
         tjumlah.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -575,13 +574,17 @@ public class formpenjualan extends javax.swing.JFrame {
                     p.setString(9, tanggal);
 
                     p.executeUpdate();
+                    
+                    String sql2="UPDATE tbl_barang set jumlah=jumlah - '"+jjumlah+"' where id_barang='"+idbarang+"'";
+                    PreparedStatement stat2= c.prepareStatement(sql2);
+                    stat2.executeUpdate();
+                    
                     p.close();
 
                 } catch (SQLException e) {
                     System.out.println("Error"+e);
                 } finally {
                     loadData();
-                    idpenjualan();
 
                     tidbarang.setText("");
                     thsatuan.setText("");
@@ -592,12 +595,29 @@ public class formpenjualan extends javax.swing.JFrame {
                     ttotal.setText("");
                     tkembalian.setText("");
 
-                    JOptionPane.showMessageDialog(null, "Data berhasil tersimpan", "ISPA MANDIRI", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Data berhasil tersimpan dan segera print INVOICE", "ISPA MANDIRI", JOptionPane.INFORMATION_MESSAGE);
                 }
             }
             
             
-            //dsdsdsdsd
+            try{
+
+                String namaFile = ("src/ispamandiri/invoice.jasper");
+                Connection conn = new koneksi().getKoneksi();
+                HashMap parameter = new HashMap();
+                String param = tidpenjualan.getText();
+                //parameter
+                parameter.put("kode",param);
+                File report_file = new File(namaFile);
+                JasperReport jasperReport = (JasperReport) JRLoader.loadObject(report_file.getPath());
+                JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,parameter, conn);
+                JasperViewer.viewReport(jasperPrint, false);
+                JasperViewer.setDefaultLookAndFeelDecorated(true);
+                
+                idpenjualan();
+            } catch (Exception rptexcpt) {
+                System.out.println("Report Can't view because : " + rptexcpt);
+            }
 
         } catch (Exception e )  {
             System.out.println(e);

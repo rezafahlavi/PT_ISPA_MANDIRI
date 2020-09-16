@@ -43,6 +43,7 @@ public class formlaporan extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Laporan");
@@ -76,13 +77,21 @@ public class formlaporan extends javax.swing.JFrame {
         });
         jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 220, -1, 30));
 
-        jButton4.setText("Laporan Produksi Barang");
+        jButton4.setText("Laporan Barang Masuk");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 140, 170, 40));
+        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 180, 40));
+
+        jButton5.setText("Laporan Barang Keluar");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 140, 180, 40));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 300));
 
@@ -99,7 +108,7 @@ public class formlaporan extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
     // TODO add your handling code here:          
         try {
-             String namaFile="src/laporan/barang.jasper";
+             String namaFile="src/laporan/stok.jasper";
              Connection conn = koneksi.getKoneksi();
              HashMap parameter = new HashMap();   
              File report_file = new File (namaFile);
@@ -132,7 +141,7 @@ public class formlaporan extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
          try {
-             String namaFile="src/laporan/stock.jasper";
+             String namaFile="src/laporan/barang_masuk.jasper";
              Connection conn = koneksi.getKoneksi();
              HashMap parameter = new HashMap();
              File report_file = new File (namaFile);
@@ -144,6 +153,22 @@ public class formlaporan extends javax.swing.JFrame {
   JOptionPane.showMessageDialog(null,e.getMessage());
 }
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        try {
+             String namaFile="src/laporan/barang_keluar.jasper";
+             Connection conn = koneksi.getKoneksi();
+             HashMap parameter = new HashMap();   
+             File report_file = new File (namaFile);
+             JasperPrint jasperPrint = JasperFillManager.fillReport(namaFile,parameter,conn);
+             JasperViewer.viewReport(jasperPrint,true);//coba
+ //          JasperPrintManager.printReport (jasPri,true);
+  
+} catch (Exception e) {
+  JOptionPane.showMessageDialog(null, e.getMessage());
+}   
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -185,6 +210,7 @@ public class formlaporan extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

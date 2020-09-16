@@ -366,6 +366,11 @@ public class formbarangmasuk extends javax.swing.JFrame {
               
                 
                 p.executeUpdate();
+                
+                String sql2="UPDATE tbl_barang set jumlah=jumlah + '"+jbarang+"' where id_barang='"+idbarang+"'";
+                PreparedStatement stat2= c.prepareStatement(sql2);
+                stat2.executeUpdate();
+                
                 p.close();
                 
             } catch (SQLException e) {
