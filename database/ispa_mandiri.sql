@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.2
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 11 Agu 2020 pada 12.04
--- Versi server: 10.4.11-MariaDB
--- Versi PHP: 7.2.26
+-- Generation Time: Sep 17, 2020 at 11:55 AM
+-- Server version: 10.4.11-MariaDB
+-- PHP Version: 7.4.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -25,55 +24,76 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_barang`
+-- Table structure for table `tbl_barang`
 --
 
 CREATE TABLE `tbl_barang` (
-  `kd_barang` varchar(10) NOT NULL,
+  `id_barang` varchar(20) NOT NULL,
   `nama_barang` varchar(50) NOT NULL,
-  `jumlah_barang` int(11) NOT NULL,
-  `harga_beli` int(11) NOT NULL,
-  `harga_jual` int(11) NOT NULL,
-  `tanggal_masuk` date NOT NULL
+  `jumlah` int(20) NOT NULL,
+  `harga_beli` int(30) NOT NULL,
+  `harga_jual` int(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tbl_barang`
+-- Dumping data for table `tbl_barang`
 --
 
-INSERT INTO `tbl_barang` (`kd_barang`, `nama_barang`, `jumlah_barang`, `harga_beli`, `harga_jual`, `tanggal_masuk`) VALUES
-('B0001', 'Tiang Listrik 2/900', 33, 6000000, 7000000, '2020-08-11'),
-('B0002', 'Box Aco TR', 10, 4000000, 5000000, '2020-08-11');
+INSERT INTO `tbl_barang` (`id_barang`, `nama_barang`, `jumlah`, `harga_beli`, `harga_jual`) VALUES
+('B0001', 'UPS Trident 850', 85, 500000, 550000),
+('B0002', 'MCB 6A', 150, 40000, 45000),
+('B0003', 'Travo 5a', 80, 110000, 120000);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_beli`
+-- Table structure for table `tbl_barang_keluar`
 --
 
-CREATE TABLE `tbl_beli` (
-  `nofaktur` varchar(11) NOT NULL,
-  `kd_barang` varchar(11) NOT NULL,
+CREATE TABLE `tbl_barang_keluar` (
+  `id_barang_keluar` varchar(30) NOT NULL,
+  `id_barang` varchar(30) NOT NULL,
   `nama_barang` varchar(50) NOT NULL,
-  `hsatuan` int(11) NOT NULL,
-  `jumlah_beli` int(11) NOT NULL,
-  `harga` int(11) NOT NULL,
-  `bayar` int(11) NOT NULL,
-  `kembalian` int(11) NOT NULL,
-  `tanggal` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `jumlah` int(30) NOT NULL,
+  `tanggal_keluar` date NOT NULL,
+  `keterangan` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tbl_beli`
+-- Dumping data for table `tbl_barang_keluar`
 --
 
-INSERT INTO `tbl_beli` (`nofaktur`, `kd_barang`, `nama_barang`, `hsatuan`, `jumlah_beli`, `harga`, `bayar`, `kembalian`, `tanggal`) VALUES
-('F0001', 'B0001', 'Tiang Listrik 2/900', 7000000, 1, 7000000, 7000000, 0, '2020-08-11');
+INSERT INTO `tbl_barang_keluar` (`id_barang_keluar`, `id_barang`, `nama_barang`, `jumlah`, `tanggal_keluar`, `keterangan`) VALUES
+('K0001', 'B0003', 'Travo 5a', 10, '2020-09-01', 'Kebutuhan Toko'),
+('K0002', 'B0001', 'UPS Trident 850', 5, '2020-09-02', 'Sample Toko');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_login`
+-- Table structure for table `tbl_barang_masuk`
+--
+
+CREATE TABLE `tbl_barang_masuk` (
+  `id_barang_masuk` varchar(30) NOT NULL,
+  `id_barang` varchar(30) NOT NULL,
+  `nama_barang` varchar(50) NOT NULL,
+  `jumlah` int(30) NOT NULL,
+  `tanggal_masuk` date NOT NULL,
+  `keterangan` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_barang_masuk`
+--
+
+INSERT INTO `tbl_barang_masuk` (`id_barang_masuk`, `id_barang`, `nama_barang`, `jumlah`, `tanggal_masuk`, `keterangan`) VALUES
+('M0001', 'B0001', 'UPS Trident 850', 50, '2020-09-02', 'Restok'),
+('M0002', 'B0002', 'MCB 6A', 50, '2020-09-03', 'Restok');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_login`
 --
 
 CREATE TABLE `tbl_login` (
@@ -87,7 +107,7 @@ CREATE TABLE `tbl_login` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tbl_login`
+-- Dumping data for table `tbl_login`
 --
 
 INSERT INTO `tbl_login` (`username`, `password`, `jenis_kelamin`, `email`, `no_telp`, `agama`, `alamat`) VALUES
@@ -96,73 +116,62 @@ INSERT INTO `tbl_login` (`username`, `password`, `jenis_kelamin`, `email`, `no_t
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_tmp_beli`
+-- Table structure for table `tbl_penjualan`
 --
 
-CREATE TABLE `tbl_tmp_beli` (
-  `id_tmp` int(11) NOT NULL,
-  `kd_barang` varchar(11) NOT NULL,
+CREATE TABLE `tbl_penjualan` (
+  `id_penjualan` varchar(20) NOT NULL,
+  `id_barang` varchar(11) NOT NULL,
   `nama_barang` varchar(50) NOT NULL,
   `hsatuan` int(11) NOT NULL,
   `jumlah_beli` int(11) NOT NULL,
-  `harga` int(11) NOT NULL
+  `harga` int(30) NOT NULL,
+  `bayar` int(30) NOT NULL,
+  `kembalian` int(30) NOT NULL,
+  `tanggal` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Trigger `tbl_tmp_beli`
+-- Dumping data for table `tbl_penjualan`
 --
-DELIMITER $$
-CREATE TRIGGER `batal` AFTER DELETE ON `tbl_tmp_beli` FOR EACH ROW BEGIN
-UPDATE tbl_barang SET jumlah_barang = jumlah_barang + OLD.jumlah_beli
-WHERE kd_barang = OLD.kd_barang;
-END
-$$
-DELIMITER ;
-DELIMITER $$
-CREATE TRIGGER `beli` AFTER INSERT ON `tbl_tmp_beli` FOR EACH ROW BEGIN 
-UPDATE tbl_barang SET jumlah_barang = jumlah_barang - new.jumlah_beli 
-WHERE kd_barang = new.`kd_barang`; 
-END
-$$
-DELIMITER ;
+
+INSERT INTO `tbl_penjualan` (`id_penjualan`, `id_barang`, `nama_barang`, `hsatuan`, `jumlah_beli`, `harga`, `bayar`, `kembalian`, `tanggal`) VALUES
+('P0001', 'B0001', 'UPS Trident 850', 550000, 10, 5500000, 5500000, 0, '2020-09-05'),
+('P0002', 'B0003', 'Travo 5a', 120000, 10, 1200000, 1200000, 0, '2020-09-07');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indeks untuk tabel `tbl_barang`
+-- Indexes for table `tbl_barang`
 --
 ALTER TABLE `tbl_barang`
-  ADD PRIMARY KEY (`kd_barang`);
+  ADD PRIMARY KEY (`id_barang`);
 
 --
--- Indeks untuk tabel `tbl_beli`
+-- Indexes for table `tbl_barang_keluar`
 --
-ALTER TABLE `tbl_beli`
-  ADD PRIMARY KEY (`nofaktur`);
+ALTER TABLE `tbl_barang_keluar`
+  ADD PRIMARY KEY (`id_barang_keluar`);
 
 --
--- Indeks untuk tabel `tbl_login`
+-- Indexes for table `tbl_barang_masuk`
+--
+ALTER TABLE `tbl_barang_masuk`
+  ADD PRIMARY KEY (`id_barang_masuk`);
+
+--
+-- Indexes for table `tbl_login`
 --
 ALTER TABLE `tbl_login`
   ADD PRIMARY KEY (`username`);
 
 --
--- Indeks untuk tabel `tbl_tmp_beli`
+-- Indexes for table `tbl_penjualan`
 --
-ALTER TABLE `tbl_tmp_beli`
-  ADD PRIMARY KEY (`id_tmp`);
-
---
--- AUTO_INCREMENT untuk tabel yang dibuang
---
-
---
--- AUTO_INCREMENT untuk tabel `tbl_tmp_beli`
---
-ALTER TABLE `tbl_tmp_beli`
-  MODIFY `id_tmp` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `tbl_penjualan`
+  ADD PRIMARY KEY (`id_penjualan`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
