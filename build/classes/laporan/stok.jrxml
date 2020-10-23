@@ -144,7 +144,7 @@ FROM
 				<textFieldExpression><![CDATA[new SimpleDateFormat("EEEE dd MMMMM yyyy",new java.util.Locale("id")).format(new Date())]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="4e094104-2a07-4708-94cc-1812be278600" x="334" y="86" width="100" height="20"/>
+				<reportElement uuid="4e094104-2a07-4708-94cc-1812be278600" x="334" y="24" width="100" height="20"/>
 				<textElement/>
 				<text><![CDATA[Kepala Operasional]]></text>
 			</staticText>
@@ -154,9 +154,9 @@ FROM
 				<text><![CDATA[Jakarta]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="db13d466-aefa-4b8b-b046-4f7d065c63e4" x="350" y="25" width="60" height="20"/>
+				<reportElement uuid="db13d466-aefa-4b8b-b046-4f7d065c63e4" x="355" y="96" width="60" height="20"/>
 				<textElement/>
-				<text><![CDATA[Mengetahui]]></text>
+				<text><![CDATA[( Rachmat )]]></text>
 			</staticText>
 		</band>
 	</columnFooter>

@@ -141,23 +141,13 @@ FROM
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="112" splitType="Stretch">
+		<band height="119" splitType="Stretch">
 			<line>
 				<reportElement uuid="8b128833-3a74-4c9a-a767-d4e79fdb4bf8" positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1"/>
 				<graphicElement>
 					<pen lineWidth="0.5" lineColor="#999999"/>
 				</graphicElement>
 			</line>
-			<staticText>
-				<reportElement uuid="db13d466-aefa-4b8b-b046-4f7d065c63e4" x="350" y="25" width="60" height="20"/>
-				<textElement/>
-				<text><![CDATA[Mengetahui]]></text>
-			</staticText>
-			<staticText>
-				<reportElement uuid="4e094104-2a07-4708-94cc-1812be278600" x="334" y="86" width="100" height="20"/>
-				<textElement/>
-				<text><![CDATA[Kepala Operasional]]></text>
-			</staticText>
 			<staticText>
 				<reportElement uuid="0890ba5a-52e0-4a7c-bad6-7411e56b94eb" x="280" y="5" width="54" height="20"/>
 				<textElement/>
@@ -170,6 +160,16 @@ FROM
 				</textElement>
 				<textFieldExpression><![CDATA[new SimpleDateFormat("EEEE dd MMMMM yyyy",new java.util.Locale("id")).format(new Date())]]></textFieldExpression>
 			</textField>
+			<staticText>
+				<reportElement uuid="4e094104-2a07-4708-94cc-1812be278600" x="334" y="25" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Kepala Operasional]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="db13d466-aefa-4b8b-b046-4f7d065c63e4" x="355" y="97" width="60" height="20"/>
+				<textElement/>
+				<text><![CDATA[( Rachmat )]]></text>
+			</staticText>
 		</band>
 	</columnFooter>
 	<pageFooter>

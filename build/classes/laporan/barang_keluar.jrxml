@@ -28,20 +28,32 @@ FROM
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="70" splitType="Stretch">
-			<image>
-				<reportElement uuid="b39665b2-c45b-4d0f-88d1-7886759559f7" x="-20" y="0" width="595" height="64"/>
-				<imageExpression><![CDATA["wood.jpg"]]></imageExpression>
-			</image>
+		<band height="145" splitType="Stretch">
 			<staticText>
-				<reportElement uuid="1deac74f-1660-4cfa-af6b-edac85a3d6b7" style="Title" x="0" y="5" width="263" height="33"/>
-				<textElement verticalAlignment="Middle"/>
-				<text><![CDATA[Wood Title]]></text>
+				<reportElement uuid="66d1f4f7-1946-4bc6-a2b1-9d7c6cfc9be9" style="SubTitle" x="171" y="82" width="196" height="22"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" pdfFontName="Times-Roman"/>
+				</textElement>
+				<text><![CDATA[Laporan Barang Keluar]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="13ac53f5-7ee7-4c8f-9be8-32fb6596ce37" style="SubTitle" x="63" y="39" width="200" height="22" forecolor="#FFFFFF"/>
-				<textElement textAlignment="Right"/>
-				<text><![CDATA[Wood SubTitle]]></text>
+				<reportElement uuid="e67ee3f3-47db-426a-9ef3-3dbe223fdba7" x="79" y="104" width="383" height="18"/>
+				<textElement textAlignment="Center">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Jl. Paseban Raya No. 20 RT 005 / RW 003 Kel Paseban- Kec Senen]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="66d1f4f7-1946-4bc6-a2b1-9d7c6cfc9be9" style="SubTitle" mode="Transparent" x="10" y="10" width="552" height="72" forecolor="#000000" backcolor="#000000"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="50" isBold="true" pdfFontName="Times-Roman"/>
+				</textElement>
+				<text><![CDATA[PT.ISPA MANDIRI]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="82bcf7b5-0273-4376-9a53-53145dd46f3e" x="133" y="122" width="266" height="20"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[telpon 021-33444201  fax 021-3903797]]></text>
 			</staticText>
 		</band>
 	</title>
@@ -59,32 +71,32 @@ FROM
 			<staticText>
 				<reportElement uuid="197c36d2-e0ca-4cd5-9496-fd5efe378e90" style="Column header" x="0" y="19" width="92" height="15"/>
 				<textElement/>
-				<text><![CDATA[tbl_barang_keluar_id_barang_keluar]]></text>
+				<text><![CDATA[ID_Keluar]]></text>
 			</staticText>
 			<staticText>
 				<reportElement uuid="e3b8afbc-4c1d-4946-8a9f-3a7dea008963" style="Column header" x="92" y="19" width="92" height="15"/>
 				<textElement/>
-				<text><![CDATA[tbl_barang_keluar_id_barang]]></text>
+				<text><![CDATA[ID_Barang]]></text>
 			</staticText>
 			<staticText>
 				<reportElement uuid="8c7d7351-146c-44aa-8c01-a1825caf782b" style="Column header" x="184" y="19" width="92" height="15"/>
 				<textElement/>
-				<text><![CDATA[tbl_barang_keluar_nama_barang]]></text>
+				<text><![CDATA[Nama_Barang]]></text>
 			</staticText>
 			<staticText>
 				<reportElement uuid="61179d67-68d5-483a-9ea5-7f7fb8d74e65" style="Column header" x="276" y="19" width="92" height="15"/>
 				<textElement/>
-				<text><![CDATA[tbl_barang_keluar_jumlah]]></text>
+				<text><![CDATA[Jumlah]]></text>
 			</staticText>
 			<staticText>
 				<reportElement uuid="b77f7efc-ff0b-41a9-a6b2-db360ae623a4" style="Column header" x="368" y="19" width="92" height="15"/>
 				<textElement/>
-				<text><![CDATA[tbl_barang_keluar_tanggal_keluar]]></text>
+				<text><![CDATA[Tanggal]]></text>
 			</staticText>
 			<staticText>
 				<reportElement uuid="f5ae13e8-4c0c-4ac1-a3e4-44087d4a0620" style="Column header" x="460" y="19" width="92" height="15"/>
 				<textElement/>
-				<text><![CDATA[tbl_barang_keluar_keterangan]]></text>
+				<text><![CDATA[Keterangan]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
@@ -116,8 +128,8 @@ FROM
 				<textElement/>
 				<textFieldExpression><![CDATA[$F{tbl_barang_keluar_jumlah}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement uuid="14751640-714b-4ce6-a547-f7871cb179c3" style="Detail" x="368" y="0" width="92" height="15"/>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="14751640-714b-4ce6-a547-f7871cb179c3" style="Detail" x="368" y="0" width="66" height="15"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[$F{tbl_barang_keluar_tanggal_keluar}]]></textFieldExpression>
 			</textField>
@@ -129,13 +141,35 @@ FROM
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="45" splitType="Stretch">
+		<band height="137" splitType="Stretch">
 			<line>
 				<reportElement uuid="0e07d9b6-752e-4740-aa6d-418e16b50156" positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1"/>
 				<graphicElement>
 					<pen lineWidth="0.5" lineColor="#999999"/>
 				</graphicElement>
 			</line>
+			<staticText>
+				<reportElement uuid="0890ba5a-52e0-4a7c-bad6-7411e56b94eb" x="280" y="5" width="54" height="20"/>
+				<textElement/>
+				<text><![CDATA[Jakarta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="db13d466-aefa-4b8b-b046-4f7d065c63e4" x="355" y="97" width="60" height="20"/>
+				<textElement/>
+				<text><![CDATA[( Rachmat )]]></text>
+			</staticText>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement uuid="10226bc2-b057-40df-9144-c04f6ce57b79" style="Column header" x="355" y="4" width="197" height="20" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("EEEE dd MMMMM yyyy",new java.util.Locale("id")).format(new Date())]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="4e094104-2a07-4708-94cc-1812be278600" x="334" y="25" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Kepala Operasional]]></text>
+			</staticText>
 		</band>
 	</columnFooter>
 	<pageFooter>
@@ -153,13 +187,6 @@ FROM
 					<font size="10" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
-			</textField>
-			<textField pattern="EEEEE dd MMMMM yyyy">
-				<reportElement uuid="58ba3d64-6de5-49bb-a827-a6054339b863" style="Column header" x="0" y="0" width="197" height="20"/>
-				<textElement>
-					<font size="10" isBold="false"/>
-				</textElement>
-				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageFooter>
